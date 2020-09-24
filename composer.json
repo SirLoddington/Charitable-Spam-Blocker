@@ -1,5 +1,13 @@
 {
+    "name": "wpcharitable/charitable-spamblocker",
+    "description": "Block spam donations.",
+    "homepage": "https://github.com/Charitable/Charitable-Spam-Blocker",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
     "require": {
         "wpcharitable/charitable-extension-activation": "^1.1"
+    },
+    "require-dev": {
+        "wp-cli/i18n-command": "2.2.5"
     }
 }

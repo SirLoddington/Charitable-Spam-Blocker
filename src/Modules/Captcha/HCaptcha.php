@@ -170,6 +170,11 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\HCaptcha'
 		 * @return void
 		 */
 		public function add_hcaptcha_to_form( $form ) {
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
+				return;
+			}
+
 			if ( $this->is_enabled_for_form( $this->get_current_form_from_class( $form ) ) ) {
 				ob_start();
 				?>
@@ -325,6 +330,11 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\HCaptcha'
 				return $ret;
 			}
 
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
+				return $ret;
+			}
+
 			if ( ! $this->is_enabled_for_form( $this->get_current_form_from_class( $form ) ) ) {
 				return $ret;
 			}
@@ -342,6 +352,11 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\HCaptcha'
 		 * @return void
 		 */
 		public function check_recaptcha_before_form_processing() {
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
+				return;
+			}
+
 			$form_key = $this->get_current_form_from_hook();
 
 			if ( ! $this->is_enabled_for_form( $form_key ) ) {
@@ -384,7 +399,7 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\HCaptcha'
 		public function is_captcha_valid() {
 			if ( ! array_key_exists( 'hcaptcha_token', $_POST ) ) {
 				charitable_get_notices()->add_error( __( 'Missing captcha token.', 'charitable-spamblocker' ) );
-				return false;
+				return true;
 			}
 
 			$response = wp_remote_post(

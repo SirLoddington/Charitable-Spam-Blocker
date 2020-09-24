@@ -304,6 +304,11 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\GoogleReC
 		 * @return void
 		 */
 		public function add_invisible_div( \Charitable_Form $form ) {
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
+				return;
+			}
+
 			if ( $this->is_enabled_for_form( $this->get_current_form_from_class( $form ) ) ) {
 				ob_start();
 				?>
@@ -324,6 +329,11 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\GoogleReC
 		 * @return void
 		 */
 		public function check_recaptcha_before_form_processing() {
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
+				return;
+			}
+
 			$form_key = $this->get_current_form_from_hook();
 
 			if ( $this->is_enabled_for_form( $form_key ) && ! $this->is_captcha_valid() ) {
@@ -360,8 +370,13 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\GoogleReC
 		 * @param  Charitable_Donation_Form $form The donation form object.
 		 * @return boolean
 		 */
-		public function validate_recaptcha( $ret, Charitable_Donation_Form $form ) {
+		public function validate_recaptcha( $ret, \Charitable_Donation_Form $form ) {
 			if ( ! $ret ) {
+				return $ret;
+			}
+
+			/* Don't show captcha for logged in users. */
+			if ( is_user_logged_in() && 'no' === charitable_get_option( 'captcha_logged_in', 'no' ) ) {
 				return $ret;
 			}
 
