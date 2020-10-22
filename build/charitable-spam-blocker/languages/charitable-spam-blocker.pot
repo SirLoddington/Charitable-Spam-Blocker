@@ -1,0 +1,54 @@
+# Copyright (C) 2020 WP Charitable
+# This file is distributed under the same license as the Charitable - Spam Blocker plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Charitable - Spam Blocker 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/charitable-spam-blocker\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-09-24T05:31:31+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: charitable-spam-blocker\n"
+
+#. Plugin Name of the plugin
+msgid "Charitable - Spam Blocker"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/Charitable/Charitable-Spam-Blocker"
+msgstr ""
+
+#. Description of the plugin
+msgid "Add a series of tools to help block spam donation form submissions."
+msgstr ""
+
+#. Author of the plugin
+msgid "WP Charitable"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.wpcharitable.com"
+msgstr ""
+
+#. translators: %s: link to activate Charitable
+#: charitable-spam-blocker.php:48
+msgid "Charitable Spam Blocker requires Charitable! Please <a href=\"%s\">activate it</a> to continue."
+msgstr ""
+
+#. translators: %s: link to install Charitable
+#: charitable-spam-blocker.php:51
+msgid "Charitable Spam Blocker requires Charitable! Please <a href=\"%s\">install it</a> to continue."
+msgstr ""
+
+#. translators: %s: link to update Charitable
+#: charitable-spam-blocker.php:54
+msgid "Charitable Spam Blocker requires Charitable 1.6.40+! Please <a href=\"%s\">update Charitable</a> to continue."
+msgstr ""
+
+#: src/Admin/Settings.php:54
+msgid "Security"
+msgstr ""
