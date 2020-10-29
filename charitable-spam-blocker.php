@@ -19,6 +19,7 @@
 namespace Charitable\Packages\SpamBlocker;
 
 use \Charitable\Extensions\Activation\Activation;
+use \Charitable\Packages\SpamBlocker\Domain\Bootstrap;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,8 +42,8 @@ add_action(
 		$activation = new Activation( '1.6.40' );
 
 		if ( $activation->ok() ) {
-			require_once( 'src/SpamBlocker.php' );
-			return new SpamBlocker();
+			require_once( 'src/Domain/Bootstrap.php' );
+			return new Bootstrap();
 		}
 
 		/* translators: %s: link to activate Charitable */

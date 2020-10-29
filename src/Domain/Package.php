@@ -9,7 +9,7 @@
  * @since     1.0.1
  */
 
-namespace Charitable\Packages\SpamBlocker;
+namespace Charitable\Packages\SpamBlocker\Domain;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -40,9 +40,9 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Package' ) ) :
 				return;
 			}
 
-			require_once( 'SpamBlocker.php' );
+			require_once( 'Bootstrap.php' );
 
-			return new SpamBlocker();
+			return new Bootstrap();
 		}
 	}
 
