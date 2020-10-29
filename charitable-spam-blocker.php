@@ -25,6 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'CHARITABLE_SPAMBLOCKER_FEATURE_PLUGIN', true );
+
 /**
  * Load plugin class, but only if Charitable is found and activated.
  *
@@ -39,9 +41,8 @@ add_action(
 		$activation = new Activation( '1.6.40' );
 
 		if ( $activation->ok() ) {
-			spl_autoload_register( '\Charitable\Packages\SpamBlocker\autoloader' );
-
-			return new SpamBlocker( __FILE__ );
+			require_once( 'src/SpamBlocker.php' );
+			return new SpamBlocker();
 		}
 
 		/* translators: %s: link to activate Charitable */
@@ -58,46 +59,3 @@ add_action(
 		return false;
 	}
 );
-
-/**
- * Set up the plugin autoloader.
- *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \Charitable\Packages\SpamBlocker\Foo class
- * from src/Foo.php:
- *
- *      new \Charitable\Packages\SpamBlocker\Foo;
- *
- * @since  1.0.0
- *
- * @param  string $class The fully-qualified class name.
- * @return void
- */
-function autoloader( $class ) {
-	/* Plugin namespace prefix. */
-	$prefix = 'Charitable\\Packages\\SpamBlocker\\';
-
-	/* Base directory for the namespace prefix. */
-	$base_dir = __DIR__ . '/src/';
-
-	/* Check if the class name uses the namespace prefix. */
-	$len = strlen( $prefix );
-
-	if ( 0 !== strncmp( $prefix, $class, $len ) ) {
-		return;
-	}
-
-	/* Get the relative class name. */
-	$relative_class = substr( $class, $len );
-
-	/* Get the file path. */
-	$file = $base_dir . str_replace( '\\', '/', $relative_class ) . '.php';
-
-	/* Bail out if the file doesn't exist. */
-	if ( ! file_exists( $file ) ) {
-		return;
-	}
-
-	/* Finally, require the file. */
-	require $file;
-}

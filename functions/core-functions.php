@@ -42,24 +42,3 @@ function charitable_spamblocker() {
 function charitable_spamblocker_deprecated() {
 	return Deprecated::get_instance();
 }
-
-/**
- * Displays a template.
- *
- * @since  1.0.0
- *
- * @param  string|array $template_name A single template name or an ordered array of template.
- * @param  array        $args          Optional array of arguments to pass to the view.
- * @return \Charitable\Pro\SpamBlocker\Template
- */
-// function charitable_spamblocker_template( $template_name, array $args = array() ) {
-// 	if ( empty( $args ) ) {
-// 		$template = new Template( $template_name );
-// 	} else {
-// 		$template = new Template( $template_name, false );
-// 		$template->set_view_args( $args );
-// 		$template->render();
-// 	}
-
-// 	return $template;
-// }

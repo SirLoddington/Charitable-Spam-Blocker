@@ -48,15 +48,6 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\SpamBlocker' ) ) :
 		private static $instance = null;
 
 		/**
-		 * The root file of the plugin.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @var   string
-		 */
-		private $plugin_file;
-
-		/**
 		 * The root directory of the plugin.
 		 *
 		 * @since 1.0.0
@@ -78,13 +69,12 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\SpamBlocker' ) ) :
 		 * Create class instance.
 		 *
 		 * @since 1.0.0
-		 *
-		 * @param string $plugin_file Absolute path to the main plugin file.
 		 */
-		public function __construct( $plugin_file ) {
-			$this->plugin_file    = $plugin_file;
-			$this->directory_path = plugin_dir_path( $plugin_file );
-			$this->directory_url  = plugin_dir_url( $plugin_file );
+		public function __construct() {
+			$this->directory_path = plugin_dir_path( dirname( __FILE__ ) );
+			$this->directory_url  = plugin_dir_url( dirname( __FILE__ ) );
+
+			spl_autoload_register( array( $this, 'autoloader' ) );
 
 			add_action( 'charitable_start', array( $this, 'start' ), 6 );
 		}
@@ -133,6 +123,47 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\SpamBlocker' ) ) :
 			 */
 			do_action( 'charitable_spam_blocker_start', $this );
 		}
+
+		/**
+		 * Set up the plugin autoloader.
+		 *
+		 * After registering this autoload function with SPL, the following line
+		 * would cause the function to attempt to load the \Charitable\Packages\SpamBlocker\Foo class
+		 * from src/Foo.php:
+		 *
+		 *      new \Charitable\Packages\SpamBlocker\Foo;
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $class The fully-qualified class name.
+		 * @return void
+		 */
+		public function autoloader( $class ) {
+			/* Plugin namespace prefix. */
+			$prefix = 'Charitable\\Packages\\SpamBlocker\\';
+
+			/* Check if the class name uses the namespace prefix. */
+			$len = strlen( $prefix );
+
+			if ( 0 !== strncmp( $prefix, $class, $len ) ) {
+				return;
+			}
+
+			/* Get the relative class name. */
+			$relative_class = substr( $class, $len );
+
+			/* Get the file path. */
+			$file = __DIR__ . '/' . str_replace( '\\', '/', $relative_class ) . '.php';
+
+			/* Bail out if the file doesn't exist. */
+			if ( ! file_exists( $file ) ) {
+				return;
+			}
+
+			/* Finally, require the file. */
+			require $file;
+		}
+
 
 		/**
 		 * Load any other files.
@@ -241,9 +272,6 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\SpamBlocker' ) ) :
 				case 'directory':
 					$path = $base;
 					break;
-
-				default:
-					$path = $this->plugin_file;
 			}
 
 			return $path;
