@@ -1,6 +1,6 @@
 {
 	"name": "charitable-spamblocker",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"devDependencies": {
 		"grunt": "^1.0.4",
 		"grunt-contrib-clean": "^2.0.0",

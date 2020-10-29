@@ -42,7 +42,7 @@ add_action(
 		$activation = new Activation( '1.6.40' );
 
 		if ( $activation->ok() ) {
-			spl_autoload_register( 'autoloader' );
+			spl_autoload_register( '\Charitable\Packages\SpamBlocker\autoloader' );
 			return new Bootstrap();
 		}
 
