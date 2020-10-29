@@ -81,8 +81,6 @@ class Bootstrap {
 		$this->directory_path = plugin_dir_path( $this->src_dir );
 		$this->directory_url  = plugin_dir_url( $this->src_dir );
 
-		spl_autoload_register( array( $this, 'autoloader' ) );
-
 		add_action( 'charitable_start', array( $this, 'start' ), 6 );
 	}
 
@@ -130,47 +128,6 @@ class Bootstrap {
 		 */
 		do_action( 'charitable_spam_blocker_start', $this );
 	}
-
-	/**
-	 * Set up the plugin autoloader.
-	 *
-	 * After registering this autoload function with SPL, the following line
-	 * would cause the function to attempt to load the \Charitable\Packages\SpamBlocker\Foo class
-	 * from src/Foo.php:
-	 *
-	 *      new \Charitable\Packages\SpamBlocker\Foo;
-	 *
-	 * @since  1.0.0
-	 *
-	 * @param  string $class The fully-qualified class name.
-	 * @return void
-	 */
-	public function autoloader( $class ) {
-		/* Plugin namespace prefix. */
-		$prefix = 'Charitable\\Packages\\SpamBlocker\\';
-
-		/* Check if the class name uses the namespace prefix. */
-		$len = strlen( $prefix );
-
-		if ( 0 !== strncmp( $prefix, $class, $len ) ) {
-			return;
-		}
-
-		/* Get the relative class name. */
-		$relative_class = substr( $class, $len );
-
-		/* Get the file path. */
-		$file = $this->src_dir . '/' . str_replace( '\\', '/', $relative_class ) . '.php';
-
-		/* Bail out if the file doesn't exist. */
-		if ( ! file_exists( $file ) ) {
-			return;
-		}
-
-		/* Finally, require the file. */
-		require $file;
-	}
-
 
 	/**
 	 * Load any other files.

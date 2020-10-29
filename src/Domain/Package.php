@@ -37,8 +37,6 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Package' ) ) :
 				return;
 			}
 
-			require_once( 'Bootstrap.php' );
-
 			return new Bootstrap();
 		}
 	}
