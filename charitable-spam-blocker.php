@@ -3,7 +3,7 @@
  * Plugin Name:       Charitable - Spam Blocker
  * Plugin URI:        https://github.com/Charitable/Charitable-Spam-Blocker
  * Description:       Add a series of tools to help block spam donation form submissions.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            WP Charitable
  * Author URI:        https://www.wpcharitable.com
  * Requires at least: 5.0

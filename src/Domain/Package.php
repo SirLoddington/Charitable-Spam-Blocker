@@ -25,9 +25,6 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Package' ) ) :
 	 */
 	class Package {
 
-		/** Plugin version. */
-		const VERSION = '1.0.1';
-
 		/**
 		 * Load the class.
 		 *
