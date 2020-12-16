@@ -35,7 +35,7 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\Captcha' 
 		 * @return boolean
 		 */
 		public function is_active() {
-			return 'disabled' !== charitable_get_option( 'hcpatcha_sitekey' );
+			return 'disabled' !== charitable_get_option( 'captcha_provider' );
 		}
 
 		/**
@@ -57,14 +57,14 @@ if ( ! class_exists( '\Charitable\Packages\SpamBlocker\Modules\Captcha\Captcha' 
 					'type'     => 'radio',
 					'options'  => array(
 						'disabled'         => __( 'Disabled', 'charitable-spamblocker' ),
-						'google-recaptcha' => __( 'Google reCAPTCHA', 'charitable-spamblocker' ),
+						'google-recaptcha' => __( 'Google reCAPTCHA (Invisible V2)', 'charitable-spamblocker' ),
 						'hcaptcha'         => __( 'hCaptcha', 'charitable-spamblocker' ),
 					),
 					'priority' => 104,
 					'default'  => 'disabled',
 				),
 				'captcha_logged_in'      => array(
-					'title'    => __( 'Require Captcha for Logged In Users', 'charitable-spamblocker' ),
+					'title'    => __( 'Require captcha for logged-in users', 'charitable-spamblocker' ),
 					'type'     => 'radio',
 					'options'  => array(
 						'yes' => __( 'Yes', 'charitable-spamblocker' ),
