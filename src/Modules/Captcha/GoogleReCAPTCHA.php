@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2020, Eric Daams
  * @license   http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
  * @version   1.0.0
- * @since     1.0.0
+ * @since     1.0.4
  */
 
 namespace Charitable\Packages\SpamBlocker\Modules\Captcha;
