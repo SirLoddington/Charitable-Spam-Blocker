@@ -227,7 +227,41 @@ class Utils
     static public function getNodeProperties(Node\Node $node, $traversable = false)
     {
         $props = self::getPropertiesMap($node);
-        return array_keys($traversable ? array_filter($props) : $props);
+        return array_map(
+            function ($prop) {
+                $ucProp = ucfirst($prop);
+                return array(
+                    "name" => $prop,
+                    "getter" => "get$ucProp",
+                    "setter" => "set$ucProp"
+                );
+            },
+            array_keys($traversable ? array_filter($props) : $props)
+        );
+    }
+
+    /**
+     * Returns an expanded version of the traversable node properties.
+     * The return of the function is an array of node properties
+     * values with arrays flattened
+     *
+     * @param Node\Node $node Node
+     *
+     * @return array
+     */
+    static public function getExpandedNodeProperties(Node\Node $node)
+    {
+        $ret = array();
+        $props = self::getNodeProperties($node, true);
+        foreach ($props as $prop) {
+            $val = $node->{$prop["getter"]}();
+            if (is_array($val)) {
+                $ret = array_merge($ret, $val);
+            } else {
+                $ret[] = $val;
+            }
+        }
+        return $ret;
     }
 
     /**
