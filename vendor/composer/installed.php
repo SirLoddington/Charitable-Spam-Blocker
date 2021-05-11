@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7760c842d40c4701f93e1c0254feb46ba515cfd2',
+    'reference' => '04a160f1dbbe986819cfd170962d2a9cbc802883',
     'name' => 'wpcharitable/charitable-spamblocker',
   ),
   'versions' => 
@@ -117,7 +117,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7760c842d40c4701f93e1c0254feb46ba515cfd2',
+      'reference' => '04a160f1dbbe986819cfd170962d2a9cbc802883',
     ),
   ),
 );
