@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '04a160f1dbbe986819cfd170962d2a9cbc802883',
+    'reference' => 'd23729d419c655cd6c7c61f26c060e3f2cc809dc',
     'name' => 'wpcharitable/charitable-spamblocker',
   ),
   'versions' => 
@@ -58,12 +58,12 @@
     ),
     'symfony/finder' => 
     array (
-      'pretty_version' => 'v5.2.4',
-      'version' => '5.2.4.0',
+      'pretty_version' => 'v5.2.8',
+      'version' => '5.2.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0d639a0943822626290d169965804f79400e6a04',
+      'reference' => 'eccb8be70d7a6a2230d05f6ecede40f3fdd9e252',
     ),
     'wp-cli/i18n-command' => 
     array (
@@ -103,12 +103,12 @@
     ),
     'wpcharitable/charitable-extension-activation' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '26b5f371b73ae48c2ddab1a148a57e4597ee7080',
+      'reference' => 'a797975432dce9816b5f6ab359a18abdbd867004',
     ),
     'wpcharitable/charitable-spamblocker' => 
     array (
@@ -117,7 +117,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '04a160f1dbbe986819cfd170962d2a9cbc802883',
+      'reference' => 'd23729d419c655cd6c7c61f26c060e3f2cc809dc',
     ),
   ),
 );

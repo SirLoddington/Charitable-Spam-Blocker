@@ -4,7 +4,7 @@
  *
  * @package Charitable/Extensions/Activation/Activation
  * @since   1.0.0
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 namespace Charitable\Extensions\Activation;
@@ -46,6 +46,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 
 			/* Charitable is active. */
 			if ( class_exists( '\Charitable' ) ) {
+				$this->has_charitable  = true;
 				$this->has_min_version = version_compare( \Charitable::VERSION, $min_version, '>=' );
 				return;
 			}
@@ -57,6 +58,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 			foreach ( \get_plugins() as $plugin_path => $plugin ) {
 				if ( 'Charitable' === $plugin['Name'] ) {
 					$this->has_charitable  = true;
+					$this->has_min_version = version_compare( $plugin['Version'], $min_version, '>=' );
 					$this->charitable_base = $plugin_path;
 					break;
 				}
@@ -71,7 +73,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 		 * @return boolean
 		 */
 		public function ok() {
-			return $this->has_min_version;
+			return class_exists( '\Charitable' ) && $this->has_min_version;
 		}
 
 		/**
@@ -94,6 +96,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 		 */
 		public function missing_charitable_notice() {
 			if ( ! $this->has_min_version ) {
+				/* We need to update Charitable. */
 				if ( ! isset( $this->update_notice ) ) {
 					return;
 				}
@@ -106,6 +109,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 					)
 				);
 			} elseif ( $this->has_charitable ) {
+				/* We need to activate Charitable. */
 				if ( ! isset( $this->activation_notice ) ) {
 					return;
 				}
@@ -118,6 +122,7 @@ if ( ! class_exists( '\Charitable\Extensions\Activation\Activation' ) ) :
 					)
 				);
 			} else {
+				/* We need to install Charitable. */
 				if ( ! isset( $this->installation_notice ) ) {
 					return;
 				}
