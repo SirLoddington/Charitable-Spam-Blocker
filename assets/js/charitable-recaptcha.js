@@ -13,7 +13,8 @@ var charitable_reCAPTCHA_onload = function() {
 		 * form processing.
 		 */
 		var donation_form_handler = function() {
-			var helper;
+			var helper,
+				executed = false;
 
 			recaptcha_id = grecaptcha.render( $recaptcha[0], {
 				'sitekey' : CHARITABLE_RECAPTCHA.site_key,
@@ -25,6 +26,10 @@ var charitable_reCAPTCHA_onload = function() {
 					helper.add_error( CHARITABLE_RECAPTCHA.error_message );
 					helper.remove_pending_process_by_name( 'recaptcha' );
 				},
+				'expired-callback' : function() {
+					input.setAttribute( 'value', null );
+					helper.remove_pending_process_by_name( 'recaptcha' );
+				},
 				'size' : 'invisible',
 				'isolated' : true,
 			} );
@@ -33,9 +38,15 @@ var charitable_reCAPTCHA_onload = function() {
 				helper = target;
 
 				if ( helper.errors.length === 0 ) {
+					if ( executed ) {
+						grecaptcha.reset( recaptcha_id );
+					}
+
 					helper.add_pending_process( 'recaptcha' );
 
 					grecaptcha.execute( recaptcha_id );
+
+					executed = true;
 				}
 			} );
 		}
