@@ -29,11 +29,11 @@
         "wpcharitable/charitable-extension-activation": "^1.1"
     },
     "require-dev": {
-        "wp-cli/i18n-command": "2.2.6"
+        "wp-cli/i18n-command": "^2.2.9"
     },
     "scripts": {
         "makepot-audit": [
-            "wp --allow-root i18n make-pot . --exclude=\"bin,node_modules,tests\" --slug=charitable-spam-blocker"
+            "wp --allow-root i18n make-pot . --exclude=\"bin,node_modules,tests,vendor\" --slug=charitable-spam-blocker"
         ],
         "makepot": [
             "@makepot-audit --skip-audit"
